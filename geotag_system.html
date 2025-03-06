@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carol Huang - Geotag System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Color Palette */
+        :root {
+            --coral: #FF6F61;
+            /* Emphasis color (buttons, headings) */
+            --coral-light: #FFD6D0;
+            /* Lighter version for backgrounds/hover states */
+            --coral-dark: #E05D50;
+            /* Darker version for text/hover states */
+            --gray: #ECECEC;
+            /* Main background */
+            --black: #333333;
+            /* Main text */
+            --black-light: #555555;
+            /* Secondary text color */
+            --cream: #FAF3E0;
+            /* Content area background */
+            --white: #FFFFFF;
+            /* Pure white elements */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--black);
+        }
+
+        p {
+            color: var(--black-light);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+            min-height: 40vh;
+            width: 100%;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--coral);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(255, 111, 97, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--coral-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(255, 111, 97, 0.3);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--coral), var(--coral-light));
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--coral);
+        }
+
+        /* Project Detail Styles */
+        .project-detail {
+            padding-top: 120px;
+            /* Account for fixed header */
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--black);
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .back-link i {
+            margin-right: 8px;
+            color: var(--coral);
+        }
+
+        .back-link:hover {
+            color: var(--coral);
+            transform: translateX(-5px);
+        }
+
+        .project-header {
+            margin-bottom: 50px;
+        }
+
+        .project-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--black);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--coral);
+        }
+
+        .project-overview {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .project-image-container {
+            margin-bottom: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--coral);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--coral-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--coral);
+        }
+
+        .section-content {
+            background-color: var(--cream);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 3px solid var(--coral);
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        .section-content ul {
+            list-style: none;
+            margin-left: 10px;
+        }
+
+        .section-content li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: var(--black-light);
+        }
+
+        .section-content li::before {
+            content: "\f058";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: white;
+            padding: 30px 0;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--coral), var(--coral-light));
+        }
+
+        .copyright {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.2rem;
+            }
+
+            .project-section {
+                margin-bottom: 30px;
+            }
+
+            .section-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Carol<span>.</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Project Detail Section -->
+    <section class="project-detail section">
+        <div class="container">
+            <a href="index.html#portfolio" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+
+            <div class="project-header">
+                <h1 class="project-title">Geotag System</h1>
+                <p class="project-overview">
+                    An enhanced video geotag system that dynamically displays rich contextual information about locations,
+                    making businesses more attractive and relevant to consumers while significantly improving engagement metrics.
+                </p>
+            </div>
+
+            <div class="project-image-container">
+                <img src="Geotag_System_3x.png" alt="Geotag System Interface" class="project-image">
+            </div>
+
+            <div class="project-section">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Problem</h2>
+                <div class="section-content">
+                    <p>The geotag (spot) in videos was not engaging enough for consumers, resulting in a low click-through rate. Traditional geotags provided minimal information and failed to capture user interest or communicate the value proposition of the tagged locations.</p>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> Solution</h2>
+                <div class="section-content">
+                    <p>Designed a system to dynamically display rich metadata about the location, including popularity metrics, promotional offers, distance information, social relationships, and other contextually relevant information. This made the business more attractive and relevant to consumers by providing meaningful context that could influence their decision-making.</p>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2 class="section-title"><i class="fas fa-user-circle"></i> My Role</h2>
+                <div class="section-content">
+                    <p>Led the product strategy and design process for the enhanced geotag system. Conducted user research to identify what information would be most valuable to users when seeing a location tag. Collaborated with UX designers to create an intuitive interface that provided rich information without overwhelming the video viewing experience. Worked with engineers to implement the dynamic data retrieval system that populated the enhanced tags.</p>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Results</h2>
+                <div class="section-content">
+                    <ul>
+                        <li>Significant improvement in click-through rate</li>
+                        <li>Increased traffic to business pages</li>
+                        <li>Enhanced user engagement with geotag tooltips</li>
+                        <li>Reduced bounce rate from geotag clicks, indicating higher relevance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 Carol Huang. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Handle header scrolling effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
