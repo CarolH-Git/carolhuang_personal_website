@@ -1045,138 +1045,313 @@
             justify-content: center;
         }
 
-        /* Timeline Fix */
-        @media (max-width: 992px) {
-            /* Keep the timeline centered */
-            .timeline::after {
-                left: 50%;
-                margin-left: -1px;
-            }
+       /* Experience Section - Timeline with consistent background */
+#experience {
+    background-color: var(--white);
+    color: var(--black);
+    position: relative;
+    padding: 5rem 0;
+    overflow: hidden;
+    z-index: 1;
+}
 
-            .timeline-dot {
-                left: 50%;
-                margin-left: -9px;
-            }
+#experience .section-title {
+    color: var(--black);
+}
 
-            /* Adjust the timeline block layout */
-            .timeline-block {
-                flex-direction: column;
-                align-items: center;
-            }
+#experience .section-title::after {
+    background-color: var(--coral);
+}
 
-            /* Style the left and right content boxes */
-            .timeline-content-left,
-            .timeline-content-right {
-                width: 80%;
-                max-width: 500px;
-                margin: 0 0 20px 0;
-                float: none;
-            }
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
 
-            /* Keep text alignment */
-            .timeline-content-left {
-                text-align: right;
-            }
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: rgba(255, 111, 97, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+    z-index: 0;
+}
 
-            /* Preserve the icon positioning */
-            .timeline-content-left .timeline-location,
-            .timeline-content-left .timeline-title,
-            .timeline-content-left .timeline-company {
-                justify-content: flex-end;
-            }
+.timeline-block {
+    position: relative;
+    margin-bottom: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
-            .timeline-content-left .coral-circle,
-            .timeline-content-left .company-logo {
-                margin-right: 0;
-                margin-left: 8px;
-                order: 2;
-            }
+.timeline-block:last-child {
+    margin-bottom: 0;
+}
 
-            .timeline-content-left .timeline-date .coral-circle {
-                margin-right: 8px;
-                margin-left: 0;
-                order: 0;
-            }
+.timeline-block::after {
+    content: '';
+    display: table;
+    clear: both;
+}
 
-            /* Add more spacing between timeline blocks */
-            .timeline-block {
-                margin-bottom: 100px;
-            }
+.timeline-dot {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: var(--coral);
+    border-radius: 50%;
+    left: 50%;
+    top: 30px;
+    margin-left: -9px;
+    z-index: 2;
+}
 
-            /* Make sure first content box is above the timeline dot */
-            .timeline-content-left {
-                margin-bottom: 25px;
-            }
-        }
+.timeline-content-left,
+.timeline-content-right {
+    width: 42%;
+    background-color: var(--cream);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    position: relative;
+    border-top: 3px solid var(--coral);
+    transition: all 0.3s ease;
+}
 
-        /* For even smaller screens (mobile) */
-        @media (max-width: 576px) {
-            .timeline-content-left,
-            .timeline-content-right {
-                width: 90%;
-            }
+.timeline-content-left {
+    margin-right: 8%;
+    float: left;
+    text-align: right;
+}
 
-            /* On very small screens, align all text to left for better readability */
-            .timeline-content-left {
-                text-align: left;
-            }
+.timeline-content-right {
+    margin-left: 8%;
+    float: right;
+}
 
-            .timeline-content-left .timeline-location,
-            .timeline-content-left .timeline-title,
-            .timeline-content-left .timeline-company {
-                justify-content: flex-start;
-            }
+.timeline-content-left:hover,
+.timeline-content-right:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
 
-            .timeline-content-left .coral-circle,
-            .timeline-content-left .company-logo {
-                margin-right: 8px;
-                margin-left: 0;
-                order: 0;
-            }
-        }
+.timeline-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+}
 
-        /* Simplified fix to remove the gap between timeline content boxes */
-        .timeline-content-left {
-            margin-right: 0;
-            /* Remove the right margin */
-            border-radius: 8px 0 0 8px;
-            /* Round only the left corners */
-        }
+.timeline-content-left .timeline-title {
+    justify-content: flex-end;
+}
 
-        .timeline-content-right {
-            margin-left: 0;
-            /* Remove the left margin */
-            border-radius: 0 8px 8px 0;
-            /* Round only the right corners */
-        }
+.timeline-company {
+    font-size: 1.2rem;
+    color: var(--coral);
+    margin-bottom: 5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
 
-        /* Optional: Style the descriptions box to remove its border radius on the left */
-        .timeline-descriptions {
-            border-radius: 0 6px 6px 0;
-        }
+.timeline-content-left .timeline-company {
+    justify-content: flex-end;
+}
 
-        /* Make sure the timeline block is properly centered */
-        .timeline-block {
-            justify-content: center;
-        }
+.timeline-date {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: rgba(255, 111, 97, 0.1);
+    color: var(--coral);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
 
-        /* Media query for responsive design */
-        @media (max-width: 992px) {
+.coral-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 111, 97, 0.1);
+}
 
-            .timeline-content-left,
-            .timeline-content-right {
-                width: calc(100% - 70px);
-                float: right;
-                margin-left: 70px;
-                border-radius: 8px;
-                /* Restore full border radius for mobile */
-            }
+.company-logo {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+}
 
-            .timeline-descriptions {
-                border-radius: 6px;
-                /* Restore full border radius for mobile */
-            }
-        }
+.timeline-content-left .coral-circle,
+.timeline-content-left .company-logo {
+    margin-right: 0;
+    margin-left: 8px;
+    order: 2;
+}
+
+.timeline-content-left .timeline-date .coral-circle {
+    margin-right: 8px;
+    margin-left: 0;
+    order: 0;
+}
+
+.timeline-location {
+    font-size: 0.9rem;
+    color: var(--black-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-content-left .timeline-location {
+    justify-content: flex-end;
+}
+
+.timeline-descriptions {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    padding: 15px;
+    border-left: 2px solid var(--coral-light);
+}
+
+.timeline-description {
+    line-height: 1.6;
+    color: var(--black-light);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.timeline-description:last-child {
+    margin-bottom: 0;
+}
+
+.bullet-icon {
+    display: inline-flex;
+    min-width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FIXED MOBILE TIMELINE LAYOUT */
+@media (max-width: 992px) {
+    /* Move the timeline to the left side instead of center */
+    .timeline::after {
+        left: 60px;
+    }
+    
+    .timeline-dot {
+        left: 60px;
+        margin-left: -9px;
+    }
+    
+    /* Stack the content boxes */
+    .timeline-block {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* Make both left and right content full width and aligned to the right of timeline */
+    .timeline-content-left,
+    .timeline-content-right {
+        width: 100%;
+        max-width: calc(100% - 100px);
+        margin: 0 0 30px 100px;
+        float: none;
+        border-radius: 8px;
+    }
+    
+    /* Reset all text alignment to left for better mobile readability */
+    .timeline-content-left {
+        text-align: left;
+    }
+    
+    .timeline-content-left .timeline-location,
+    .timeline-content-left .timeline-title,
+    .timeline-content-left .timeline-company {
+        justify-content: flex-start;
+    }
+    
+    .timeline-content-left .coral-circle,
+    .timeline-content-left .company-logo {
+        margin-right: 8px;
+        margin-left: 0;
+        order: 0;
+    }
+    
+    .timeline-content-left .timeline-date .coral-circle {
+        margin-right: 8px;
+        margin-left: 0;
+        order: 0;
+    }
+    
+    /* Make more space between timeline blocks for clarity */
+    .timeline-block {
+        margin-bottom: 50px;
+    }
+    
+    /* Fix border radius for descriptions */
+    .timeline-descriptions {
+        border-radius: 6px;
+        border-left: 2px solid var(--coral-light);
+    }
+}
+
+/* For smaller mobile screens */
+@media (max-width: 576px) {
+    /* Further adjust for very small screens */
+    .timeline::after {
+        left: 30px;
+    }
+    
+    .timeline-dot {
+        left: 30px;
+    }
+    
+    .timeline-content-left,
+    .timeline-content-right {
+        max-width: calc(100% - 60px);
+        margin-left: 60px;
+        padding: 20px;
+    }
+    
+    /* Make text and elements smaller on very small screens */
+    .timeline-title {
+        font-size: 1.2rem;
+    }
+    
+    .timeline-company {
+        font-size: 1rem;
+    }
+    
+    .timeline-date {
+        font-size: 0.8rem;
+    }
+    
+    .timeline-description {
+        font-size: 0.9rem;
+    }
+}
     </style>
 
 
