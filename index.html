@@ -1177,6 +1177,67 @@
                 /* Restore full border radius for mobile */
             }
         }
+        /* Add this to your existing CSS */
+
+/* Timeline responsive adjustments for small screens */
+@media (max-width: 768px) {
+    /* Move the timeline to the left on small screens */
+    .timeline::after {
+        left: 30px;
+        margin-left: 0;
+    }
+    
+    /* Adjust the timeline dot position */
+    .timeline-dot {
+        left: 30px;
+        margin-left: 0;
+    }
+    
+    /* Make both left and right content boxes full width and properly aligned */
+    .timeline-content-left,
+    .timeline-content-right {
+        width: calc(100% - 60px);
+        float: right;
+        margin-left: 60px;
+        margin-right: 0;
+        text-align: left;
+        border-radius: 8px;
+    }
+    
+    /* Left content box specific adjustments */
+    .timeline-content-left .timeline-title,
+    .timeline-content-left .timeline-company,
+    .timeline-content-left .timeline-location {
+        justify-content: flex-start;
+    }
+    
+    .timeline-content-left .coral-circle,
+    .timeline-content-left .company-logo {
+        margin-right: 8px;
+        margin-left: 0;
+        order: 0;
+    }
+    
+    /* Ensure the descriptions retain full border radius */
+    .timeline-descriptions {
+        border-radius: 6px;
+    }
+    
+    /* Make space between timeline blocks more consistent */
+    .timeline-block {
+        margin-bottom: 60px;
+    }
+}
+
+/* For very small screens, further adjustments */
+@media (max-width: 480px) {
+    .timeline-content-left,
+    .timeline-content-right {
+        width: calc(100% - 50px);
+        margin-left: 50px;
+        padding: 20px;
+    }
+}
     </style>
 
 
